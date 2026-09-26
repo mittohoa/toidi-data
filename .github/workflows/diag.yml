@@ -1,0 +1,12 @@
+name: chan-doan
+on: workflow_dispatch
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for u in https://apicms.ebms.vn/ http://timbus.vn/; do
+            code=$(curl -s -o /dev/null -m 20 -w "%{http_code}" "$u" || echo "000")
+            echo "$(echo $u | cut -d/ -f3): HTTP $code"
+          done
+          curl -s -m 10 https://ipinfo.io/country || true
