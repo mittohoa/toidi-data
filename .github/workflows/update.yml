@@ -128,6 +128,7 @@ jobs:
           import json, sys
           m = json.load(open("manifest.json", encoding="utf-8"))
           old = m["base_url"]; new = old.rsplit("/", 2)[0] + "/" + sys.argv[1] + "/"
+          m["tag"] = sys.argv[1]
           s = json.dumps(m, ensure_ascii=False, indent=1).replace(old, new)
           open("manifest.json", "w", encoding="utf-8").write(s)
           EOF
