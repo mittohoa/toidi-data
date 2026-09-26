@@ -41,7 +41,15 @@ Như mọi dịch vụ web, máy chủ ghi nhận địa chỉ IP của yêu c�
 Dữ liệu được giữ cho tới khi bạn xoá. **Không** gửi lên: vị trí hiện tại, đường đi thực tế lúc đang đi, tìm kiếm
 gần đây, âm thanh.
 
-## 3. Tải dữ liệu giao thông và bản đồ
+## 3. Đánh giá chuyến đi (tuỳ chọn, ẩn danh)
+
+Sau mỗi chuyến, bạn có thể bấm 👍/👎 và chọn vài nhãn (xe trễ, quá đông, sai giờ chạy…). Đánh giá lưu cùng lịch sử
+chuyến trên máy (và đồng bộ nếu bạn đăng nhập). Nếu bạn để bật "Gửi ẩn danh để TÔI ĐI sửa dữ liệu", app gửi lên
+máy chủ (Supabase) một báo cáo **không kèm tài khoản, tên địa điểm hay toạ độ**: thành phố, mã tuyến và mã trạm
+lên/xuống, nhãn bạn chọn, ngày và giờ đi, tới trễ bao nhiêu phút. Báo cáo chỉ dùng để phát hiện dữ liệu sai; không
+ai đọc được qua app. Tắt được ngay trong bảng đánh giá.
+
+## 3b. Tải dữ liệu giao thông và bản đồ
 
 App tải tệp dữ liệu tuyến/trạm và bản đồ offline công khai từ GitHub (repo này). Như mọi lượt truy cập web, GitHub
 nhận địa chỉ IP của thiết bị ([chính sách của GitHub](https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement)).
@@ -95,6 +103,11 @@ ID (plus Google name/avatar if you use Google sign-in); saved places; trip histo
 locations rounded to ~100 m, start/end times, route numbers, distance, estimated fare). Trip-history sync can be turned
 off separately in Account › Sync trip history, which also deletes the server copy. Data is kept until you delete it.
 Your live location, recent searches and audio are never uploaded.
+
+**Trip ratings (optional, anonymous).** After a trip you can tap 👍/👎 and pick tags (late, crowded, wrong times…).
+Ratings are stored with your trip history. If "Send anonymously to help fix the data" is on, the app sends a report
+with **no account, place names or coordinates**: city, route and boarding/alighting stop codes, the tags you picked,
+trip date and hour, and minutes late. It is used only to find wrong data and can be turned off in the rating sheet.
 
 **Downloads.** Transit data and offline maps are downloaded from GitHub, which sees your IP address.
 
