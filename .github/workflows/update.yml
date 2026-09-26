@@ -71,7 +71,13 @@ jobs:
             echo "xong"; echo "::endgroup::"
           }
           cp data/bus-network.json.gz /tmp/hcm-old.json.gz
-          step "crawl TPHCM" python tools/crawl_hcm.py
+          # Nguồn TPHCM chặn IP nước ngoài (HTTP 403 từ máy chủ GitHub) -> TPHCM được crawl trên máy ở VN
+          # (tools/update_data.sh --hcm-only) rồi đẩy lên repo riêng tư; ở đây thử, không được thì dùng bản đó.
+          if python tools/crawl_hcm.py > "$LOG/crawl_hcm.log" 2>&1; then
+            echo "crawl TPHCM: xong"
+          else
+            echo "::warning::Không crawl được TPHCM từ máy chủ GitHub — dùng dữ liệu TPHCM mới nhất trong repo riêng tư"
+          fi
           step "crawl Ha Noi" python tools/crawl_hanoi.py
           step "metro Ha Noi" python tools/fetch_hanoi_metro.py
           step "GTFS TPHCM" python tools/build_gtfs_hcm.py
