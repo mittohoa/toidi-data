@@ -1,7 +1,0 @@
-name: thu-actions
-on: workflow_dispatch
-jobs:
-  ping:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Actions chạy được ở repo public"
