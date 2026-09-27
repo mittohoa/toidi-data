@@ -70,6 +70,15 @@ jobs:
             if ! "${@:2}" > "$LOG/$(echo "$1" | tr ' /' '__').log" 2>&1; then echo "::error::Bước '$1' lỗi"; exit 1; fi
             echo "xong"; echo "::endgroup::"
           }
+          # bước chỉ dựa vào OpenStreetMap (Overpass hay quá tải khi gọi từ GitHub): lỗi thì cảnh báo và
+          # dùng lại dữ liệu lần trước (file trong repo), không làm hỏng cả đợt cập nhật
+          soft() {
+            echo "::group::$1"
+            if ! "${@:2}" > "$LOG/$(echo "$1" | tr ' /' '__').log" 2>&1; then
+              echo "::warning::Bước '$1' không xong (Overpass?) — dùng dữ liệu lần trước"
+            else echo "xong"; fi
+            echo "::endgroup::"
+          }
           cp data/bus-network.json.gz /tmp/hcm-old.json.gz
           # Nguồn TPHCM chặn IP nước ngoài (HTTP 403 từ máy chủ GitHub) -> TPHCM được crawl trên máy ở VN
           # (tools/update_data.sh --hcm-only) rồi đẩy lên repo riêng tư; ở đây thử, không được thì dùng bản đó.
@@ -79,7 +88,7 @@ jobs:
             echo "::warning::Không crawl được TPHCM từ máy chủ GitHub — dùng dữ liệu TPHCM mới nhất trong repo riêng tư"
           fi
           step "crawl Ha Noi" python tools/crawl_hanoi.py
-          step "metro Ha Noi" python tools/fetch_hanoi_metro.py
+          soft "metro Ha Noi" python tools/fetch_hanoi_metro.py
           step "GTFS TPHCM" python tools/build_gtfs_hcm.py
           step "GTFS Ha Noi" python tools/build_gtfs_hanoi.py
           curl -sL -o /tmp/validator.jar https://github.com/MobilityData/gtfs-validator/releases/download/v8.0.1/gtfs-validator-8.0.1-cli.jar
@@ -102,9 +111,9 @@ jobs:
           fi
           if [ "$full" = "true" ]; then
             step "ban do nen" bash tools/extract_maps.sh
-            step "dia diem TPHCM" python tools/build_places.py hcm
-            step "dia diem Ha Noi" python tools/build_places.py hanoi
-            step "dia diem Da Nang" python tools/build_places.py danang
+            soft "dia diem TPHCM" python tools/build_places.py hcm
+            soft "dia diem Ha Noi" python tools/build_places.py hanoi
+            soft "dia diem Da Nang" python tools/build_places.py danang
           fi
 
       - name: So sánh + kiểm tra an toàn
