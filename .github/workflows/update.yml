@@ -93,10 +93,18 @@ jobs:
           done
           step "goi du lieu TPHCM" python tools/build_app_data.py data/gtfs/hcm.zip hcm "TP. Hồ Chí Minh"
           step "goi du lieu Ha Noi" python tools/build_app_data.py data/gtfs/hanoi.zip hanoi "Hà Nội"
+          # gói tải thêm (tools/cities.py PACKS), nguồn OpenStreetMap — không đạt kiểm tra chất lượng
+          # (tools/build_gtfs_osm.py thoát mã 2) thì giữ gói đã phát hành, không chặn TPHCM / Hà Nội
+          if python tools/build_gtfs_osm.py danang > "$LOG/osm_danang.log" 2>&1; then
+            step "goi du lieu Da Nang" python tools/build_app_data.py data/gtfs/danang.zip danang "Đà Nẵng"
+          else
+            echo "::warning::Đà Nẵng: dữ liệu OSM chưa đạt kiểm tra chất lượng — tuần này giữ gói cũ"
+          fi
           if [ "$full" = "true" ]; then
             step "ban do nen" bash tools/extract_maps.sh
             step "dia diem TPHCM" python tools/build_places.py hcm
             step "dia diem Ha Noi" python tools/build_places.py hanoi
+            step "dia diem Da Nang" python tools/build_places.py danang
           fi
 
       - name: So sánh + kiểm tra an toàn
