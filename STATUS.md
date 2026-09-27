@@ -1,8 +1,8 @@
 # Trạng thái dữ liệu
 
-Kiểm tra lần cuối: **26/09/2026 16:49** (giờ VN) — kết quả: **success**
+Kiểm tra lần cuối: **27/09/2026 14:26** (giờ VN) — kết quả: **failure**
 
-Bản phát hành mới nhất: `data-20260926`
+Bản phát hành mới nhất: `data-20260926-0949`
 
 | Thành phố | Ngày dữ liệu | Tuyến | Trạm |
 |---|---|---|---|
