@@ -1,11 +1,11 @@
 # Trạng thái dữ liệu
 
-Kiểm tra lần cuối: **28/09/2026 05:51** (giờ VN) — kết quả: **success**
+Kiểm tra lần cuối: **05/10/2026 05:38** (giờ VN) — kết quả: **failure**
 
-Bản phát hành mới nhất: `data-20260927`
+Bản phát hành mới nhất: `data-20260927-2251`
 
 | Thành phố | Ngày dữ liệu | Tuyến | Trạm |
 |---|---|---|---|
-| TP. Hồ Chí Minh | 2026-09-26 | 178 | 5898 |
+| TP. Hồ Chí Minh | 2026-09-28 | 178 | 5898 |
 | Hà Nội | 2026-09-27 | 167 | 5038 |
-| Đà Nẵng | 2026-09-27 | 20 | 768 |
+| Đà Nẵng | 2026-06-01 | 20 | 769 |
