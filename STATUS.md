@@ -1,6 +1,6 @@
 # Trạng thái dữ liệu
 
-Kiểm tra lần cuối: **02/11/2026 06:15** (giờ VN) — kết quả: **failure**
+Kiểm tra lần cuối: **09/11/2026 06:20** (giờ VN) — kết quả: **failure**
 
 Bản phát hành mới nhất: `data-20260927-2251`
 
